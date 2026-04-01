@@ -1,6 +1,6 @@
 {
   "name": "react-native-security-shield",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Secure React Native package for SSL pinning, signature validation, emulator/debug/frida/root detection, and screenshot protection.",
   "main": "index.js",
   "types": "src/types.ts",
