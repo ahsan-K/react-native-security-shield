@@ -97,17 +97,49 @@ Create this file in your app root:
 
 ### A. `android/app/build.gradle`
 
-Add the config generation task so native config files are generated before build.
+Add the config generation task so native config files are generated before build. Please put this block after android {} before dependencies {}
 
 ```gradle
 task generateSecurityConfig(type: Exec) {
-    def appRoot = rootProject.projectDir.parentFile
-    workingDir appRoot
-    commandLine "node",
-            new File(appRoot, "node_modules/react-native-security-shield/scripts/generateNativeConfig.js").absolutePath
-}
 
-preBuild.dependsOn generateSecurityConfig
+    def appRoot = rootProject.projectDir.parentFile
+
+    workingDir appRoot
+
+    commandLine "node",
+
+            new File(appRoot, "node_modules/react-native-security-shield/scripts/generateNativeConfig.js").absolutePath
+
+}
+ 
+task encodePins(type: Exec) {
+
+    def appRoot = rootProject.projectDir.parentFile
+
+    workingDir appRoot
+
+    commandLine "node",
+
+            new File(appRoot, "node_modules/react-native-security-shield/scripts/encodePins.js").absolutePath
+
+    standardInput = System.in
+
+}
+ 
+encodePins.mustRunAfter generateSecurityConfig
+ 
+tasks.whenTaskAdded { task ->
+
+    if (task.name == "assembleRelease" || task.name == "bundleRelease" || task.name == "installRelease") {
+
+        task.dependsOn generateSecurityConfig
+
+        task.dependsOn encodePins
+
+    }
+
+}
+ 
 ```
 
 Put this block **after** the `android { ... }` block and **before** `dependencies { ... }`.
