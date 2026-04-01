@@ -1,0 +1,73 @@
+buildscript {
+  ext {
+    kotlinVersion = "1.9.22"
+  }
+
+  repositories {
+    google()
+    mavenCentral()
+  }
+
+  dependencies {
+    classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
+    classpath("com.android.tools.build:gradle:8.2.2")
+  }
+}
+
+apply plugin: "com.android.library"
+apply plugin: "org.jetbrains.kotlin.android"
+
+android {
+  namespace "com.securityshield"
+  compileSdkVersion 34
+
+  defaultConfig {
+    minSdkVersion 21
+
+    externalNativeBuild {
+      cmake {
+        cppFlags "-std=c++17"
+      }
+    }
+
+    ndk {
+      abiFilters "armeabi-v7a", "arm64-v8a"
+    }
+
+    consumerProguardFiles "proguard-rules.pro"
+  }
+
+  externalNativeBuild {
+    cmake {
+      path "src/main/cpp/CMakeLists.txt"
+    }
+  }
+
+  buildTypes {
+    debug {
+    }
+    release {
+      minifyEnabled false
+    }
+  }
+
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_17
+    targetCompatibility JavaVersion.VERSION_17
+  }
+
+  kotlinOptions {
+    jvmTarget = "17"
+  }
+}
+
+repositories {
+  google()
+  mavenCentral()
+}
+
+dependencies {
+  implementation "com.facebook.react:react-android"
+  implementation "org.jetbrains.kotlin:kotlin-stdlib:1.9.22"
+  implementation "com.squareup.okhttp3:okhttp:4.12.0"
+}
