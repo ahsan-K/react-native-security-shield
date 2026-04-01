@@ -1,15 +1,15 @@
 # 🔐 React Native Security Shield
 
-A secure-first React Native package for:
+Enterprise-grade security for React Native apps.
 
 - SSL Pinning (native-oriented)
 - Android app signature validation
-- Emulator detection
 - Debugger detection
 - Frida detection
 - Root / jailbreak style checks
-- Screenshot protection
 - Reusable package setup across projects
+- Root & Emulator Detection
+- Screenshot Blocking
 
 Author: **Ahsan Ali**
 

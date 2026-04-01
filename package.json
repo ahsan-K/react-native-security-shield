@@ -17,14 +17,16 @@
   ],
   "keywords": [
     "react-native",
-    "security",
+    "react-native-security",
     "ssl-pinning",
-    "frida-detection",
+    "certificate-pinning",
+    "android-security",
+    "ios-security",
     "root-detection",
     "emulator-detection",
-    "signature-validation",
-    "screenshot-protection",
-    "tamper-detection"
+    "frida-detection",
+    "tamper-detection",
+    "app-security"
   ],
   "repository": {
     "type": "git",
